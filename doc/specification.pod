@@ -1,0 +1,111 @@
+=head1 User Manual
+
+=head2 Concepts
+
+A reverse polish notation calculator stores values on a stack.
+New values are typed on the numeric keypad and added to the bottom of the stack.
+Operators remove value(s) from the top of the stack, compute the operation, and place the result on the top of the stack.
+
+=head2 Usage
+
+Enter a number with the numeric keypad.
+Press "Enter" to add that value to the stack.
+
+When there are values on the stack, press an operation button to perform the computation.
+
+=head3 Operations
+
+=table
+
+  Operation       Button    Result
+  ---------       ------    ------
+  Addition        +         s1 + s0
+  Subtraction     -         s1 - s0
+  Multiplication  *         s1 * s0
+  Division        /         s1 / s0
+
+
+=head3 Stack Functions
+
+=table
+
+  Operation       Button    Result
+  ---------       ------    ------
+  Duplicate       Enter     place a copy of s0 on the stack
+  Exchange        x<>y      reverse the order of s0 and s1 on the stack
+  Drop            <-        remove s0
+
+
+=head1 Technical Specification
+
+=head2 Architecture
+
+The code is divided into modules,
+
+ui.py: Creates the Qt GUI window, receives keypresses from the user, and updates the displayed values.
+
+calc.py: Holds the calculator state, receives commands from the GUI or can be operated independantly.
+
+
+=head2 ui.py
+
+    +-------------------------+
+    | 3 [   stack value 3   ] |
+    | 2 [   stack value 2   ] |
+    | 1 [   stack value 1   ] |
+    | 0 [   stack value 0   ] |
+    +-------------------------+
+    | [ < ] [X>Y] [  Enter  ] |
+    | [ 7 ] [ 8 ] [ 9 ] [ \ ] |
+    | [ 4 ] [ 5 ] [ 6 ] [ * ] |
+    | [ 1 ] [ 2 ] [ 3 ] [ - ] |
+    | [    0    ] [ . ] [ + ] |
+    +-------------------------+
+
+The UI can be in one of two states,
+
+Insert: If the user presses a numeric key, a new value will be created and the state changed to edit.
+
+Edit: The values of the RPN stack will be offset by one and the value being edited shown in stack location 0.  If the user presses a numeric key, that digit is appended to the value being edited.  If the user presses any operation key, the edited value is pushed onto the stack, then the operation is applied.
+
+
+=head2 calc.py
+
+
+=item __init__()
+
+Creates a new calculator with an empty stack
+
+=item peek(n)
+
+Returns the nth value in the stack, or None if n exceeds the size of the stack.
+
+=item push(v)
+
+Adds v to the top of the stack
+
+=item pop()
+
+Removes the value from the top of the stack and returns it, or None if the stack is empty.
+
+=item add()
+
+Adds the top two values of the stack and pushes the result.
+
+=item sub()
+
+Subtracts the value from the top of the stack from the value second from the top and pushes the result.
+
+=item mul()
+
+Multiplies the top two values of the stack and pushes the result.
+
+=item div()
+
+Divides the value from the top of the stack into the value second from the top and pushes the result.
+
+=item exchange()
+
+Swaps the two values at the top of the stack.
+
+
