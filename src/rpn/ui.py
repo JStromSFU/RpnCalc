@@ -70,6 +70,8 @@ class MainWindow(QMainWindow):
     frameLayout.addWidget(keypadFrame)
 
     # Stack Operations
+    keypadFrameLayout.addWidget( self.make_operator_button( "<-", self.rpn.pop ), 0, 0 )
+    keypadFrameLayout.addWidget( self.make_operator_button( "X<>Y", self.rpn.exchange ), 0, 1 )
     keypadFrameLayout.addWidget( self.make_operator_button( "Enter", lambda: None ), 0, 2, 1, 2 )
 
     # Numeric Input
