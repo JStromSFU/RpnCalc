@@ -27,27 +27,51 @@ class MainWindow(QMainWindow):
     self.state = UiState.Insert
     self.value = ''
 
-    self.setStyleSheet("""
-    * {
-      font: bold 18px sans-serif;
-    }
 
-    QPushButton#Numpad {
-      background-color: #666;
-    }
+    if QApplication.styleHints().colorScheme() == Qt.ColorScheme.Light:
+      self.setStyleSheet("""
+      * {
+        font: bold 18px sans-serif;
+      }
 
-    QPushButton#Numpad::pressed {
-      background-color: #777;
-    }
+      QPushButton#Numpad {
+        background-color: #bbb;
+      }
 
-    QPushButton#Operator {
-      background-color: #066;
-    }
+      QPushButton#Numpad::pressed {
+        background-color: #aaa;
+      }
 
-    QPushButton#Operator::pressed {
-      background-color: #077;
-    }
-    """)
+      QPushButton#Operator {
+        background-color: #bbf;
+      }
+
+      QPushButton#Operator::pressed {
+        background-color: #aad;
+      }
+      """)
+    else:
+      self.setStyleSheet("""
+      * {
+        font: bold 18px sans-serif;
+      }
+
+      QPushButton#Numpad {
+        background-color: #666;
+      }
+
+      QPushButton#Numpad::pressed {
+        background-color: #777;
+      }
+
+      QPushButton#Operator {
+        background-color: #55b;
+      }
+
+      QPushButton#Operator::pressed {
+        background-color: #66c;
+      }
+      """)
 
     frame = QWidget()
     frameLayout = QVBoxLayout(frame)

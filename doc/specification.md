@@ -38,11 +38,18 @@ Labels on the left show the depth of the stack.
 Stack values beyond the fourth are not shown.
 If the calculator stack has fewer entries than the screen, the unused entries are shown as "-".
 
-Keys are given a background to make them easier to find:
+Keys are divided into three types for easier identification:
+Numeric: digits (0-9) and the decimal point.
+Arithmetic: add, substract, multiply, divide
+Stack: drop, swap, enter
 
-Numeric keys (0-9) and the decimal point: Light Gray
-Common arithmetic operations (add, substract, multiply, divide): Light Blue
-Common stack operations (drop, swap, enter): Light Blue
+And are styled based on the computer's color scheme:
+
+Keys | Light Scheme | Dark Scheme
+---------------------------------
+Numeric | Light Gray | Dark Gray
+Arithmetic | Light Blue | Dark Blue
+Stack | Light Blue | Dark Blue
 
 ### State & Input
 
