@@ -1,6 +1,8 @@
 from enum import Enum
 from math import isnan
+
 from PySide6.QtWidgets import *
+from PySide6.QtCore import Qt
 
 from rpn.calc import RpnCalculator
 
@@ -53,6 +55,8 @@ class MainWindow(QMainWindow):
 
     displayFrame = QGroupBox()
     displayFrameLayout = QGridLayout(displayFrame)
+    displayFrameLayout.setColumnStretch(0,0)
+    displayFrameLayout.setColumnStretch(1,1)
     frameLayout.addWidget(displayFrame)
 
     self.stack_display = []
@@ -62,6 +66,7 @@ class MainWindow(QMainWindow):
       displayFrameLayout.addWidget( QLabel( str(i), objectName="Label" ), 3-i, 0 )
       
       display = QLabel( "-", objectName="Display" )
+      display.setAlignment( Qt.AlignRight )
       self.stack_display.append(display)
       displayFrameLayout.addWidget( display, 3-i, 1 )
 
