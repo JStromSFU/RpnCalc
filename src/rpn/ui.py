@@ -1,4 +1,5 @@
 from enum import Enum
+from math import isnan
 from PySide6.QtWidgets import *
 
 from rpn.calc import RpnCalculator
@@ -22,7 +23,7 @@ class MainWindow(QMainWindow):
     self.rpn = RpnCalculator()
 
     self.state = UiState.Insert
-    self.value = 0
+    self.value = ''
 
     self.setStyleSheet("""
     * {
@@ -76,13 +77,13 @@ class MainWindow(QMainWindow):
 
     # Numeric Input
     for i in range(9):
-      button = self.make_numpad_button( i + 1 )
+      button = self.make_numpad_button( str(i + 1) )
       keypadFrameLayout.addWidget( button, 2 + i // 3, i % 3 )
 
-    zeroButton = self.make_numpad_button( 0 )
+    zeroButton = self.make_numpad_button( '0' )
     keypadFrameLayout.addWidget( zeroButton, 5, 0, 1, 2 )
 
-    keypadFrameLayout.addWidget( QPushButton( ".", objectName="Numpad" ), 5, 2 )
+    keypadFrameLayout.addWidget( self.make_numpad_button( "." ), 5, 2 )
 
     # Arithmetic operations
     keypadFrameLayout.addWidget( self.make_operator_button("/", self.rpn.div ), 2, 3 )
@@ -94,7 +95,7 @@ class MainWindow(QMainWindow):
     '''
     Create a button for numeric input
     '''
-    button = QPushButton( str(digit), objectName="Numpad" )
+    button = QPushButton( digit, objectName="Numpad" )
     button.clicked.connect( lambda: self.add_digit(digit) )
     return button
 
@@ -114,7 +115,6 @@ class MainWindow(QMainWindow):
       self.state = UiState.Edit
       self.value = d
     else:
-      self.value *= 10
       self.value += d
     self.update_display()
 
@@ -153,5 +153,6 @@ class MainWindow(QMainWindow):
     Push the edited value (if any) onto the stack
     '''
     if self.state == UiState.Edit:
-      self.rpn.push( self.value )
+      value = float(self.value)
+      self.rpn.push( value )
       self.state = UiState.Insert
