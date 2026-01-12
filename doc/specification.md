@@ -31,11 +31,36 @@ calc.py: Holds the calculator state, receives commands from the GUI or can be op
     | [    0    ] [ . ] [ + ] |
     +-------------------------+
 
+### Layout & Appearance
+
+Stack entries are shown at the top of the screen.
+Labels on the left show the depth of the stack.
+Stack values beyond the fourth are not shown.
+If the calculator stack has fewer entries than the screen, the unused entries are shown as "-".
+
+Keys are given a background to make them easier to find:
+
+Numeric keys (0-9) and the decimal point: Light Gray
+Common arithmetic operations (add, substract, multiply, divide): Light Blue
+Common stack operations (drop, swap, enter): Light Blue
+
+### State & Input
+
 The UI can be in one of two states,
 
-Insert: If the user presses a numeric key, a new value will be created and the state changed to edit.
+#### Insert
 
-Edit: The values of the RPN stack will be offset by one and the value being edited shown in stack location 0.  If the user presses a numeric key, that digit is appended to the value being edited.  If the user presses any operation key, the edited value is pushed onto the stack, then the operation is applied.
+If the user presses a numeric key, a new value will be created and the state changed to edit.
+
+#### Edit
+
+Display of the stack values will be offset by one.
+The value being edited is shown at location zero.
+
+If the user presses a numeric key, that digit is appended to the value being edited.
+
+If the user presses an operator key, the value being edited is pushed onto the stack before computing the operation.
+
 
 ### Helper Functions
 

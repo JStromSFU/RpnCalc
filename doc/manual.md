@@ -2,9 +2,16 @@
 
 ## Concepts
 
-A reverse polish notation calculator stores values on a stack.
-New values are typed on the numeric keypad and added to the stack.
-Operators remove value(s) from the stack, compute the operation, and place the result(s) on the stack.
+A calculator is used to perform numeric computations with greater speed and accuracy than by hand.
+
+Typically computations are entered in standard algebraic notation, `1 + 2 x 3`.
+A reverse polish notation calculator changes the order.
+The operands are entered first, then the operation, `1 ENTER 2 + 3 x`.
+This eliminates any confusion with order of operations and allows for operands with different number of operands to be implemented in the same manner.
+
+Values entered are stored on a stack.
+The newest value is added at location zero, moving all previous values to the next positions.
+When a math operation is invoked, the last values are removed from the stack, the operation is performed, and the result is added to the stack.
 
 ## Interface
 
@@ -24,7 +31,7 @@ Operators remove value(s) from the stack, compute the operation, and place the r
 The stack display shows the top four values on the stack with the newest entry at the bottom.
 
 The numeric keypad is used to enter new values into stack location 0.
-When you begin to type a number, numbers already on the stack will be moved to the next position.
+When you begin to type a number, values already on the stack will be moved to the next position.
 Entry can be completed with the enter key, or be using any operation.
 Unwanted entries can be removed from the stack with the "Drop" button.
 
