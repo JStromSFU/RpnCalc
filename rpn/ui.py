@@ -102,7 +102,14 @@ class MainWindow(QMainWindow):
     # Stack Operations
     keypadFrameLayout.addWidget( self.make_operator_button( "<-", self.rpn.pop ), 0, 0 )
     keypadFrameLayout.addWidget( self.make_operator_button( "X<>Y", self.rpn.exchange ), 0, 1 )
-    keypadFrameLayout.addWidget( self.make_operator_button( "Enter", lambda: None ), 0, 2, 1, 2 )
+
+    def handle_enter():
+      # make_operator_button wraps calls with do_operation
+      # which will automatically push the edited value
+      # so this doesn't need to do anything
+      pass
+
+    keypadFrameLayout.addWidget( self.make_operator_button( "Enter", handle_enter ), 0, 2, 1, 2 )
 
     # Numeric Input
     for i in range(9):
