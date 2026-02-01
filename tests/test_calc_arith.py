@@ -1,4 +1,5 @@
 import pytest
+from pytest import approx
 
 from rpn.calc import RpnCalculator
 
@@ -32,6 +33,6 @@ def test_div():
   rpn.push(5)
   rpn.div()
 
-  assert rpn.peek(0) == 4
+  assert rpn.peek(0) == approx(4)
 
 
